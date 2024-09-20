@@ -8,7 +8,7 @@ print(my_dict['Andrey'])
 my_dict.update({'Pavel':1985,
                 "Olesya":1987})
 print(my_dict)
-del my_dict['Nelly']
+my_dict.pop('Nelly')
 print(my_dict)
 
 
