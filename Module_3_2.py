@@ -1,21 +1,14 @@
-from main import check
-
-
-def send_email( message, recepient, sender = "university.help@gmail.com"):
-    import re
-
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
-
-    def check(email):
-        if (re.send_email(regex, email)):
-            print("Valid Email")
-        else:
-            print("Invalid Email")
-
-my_email = input('Введите адрес почты: ')
-
-
-send_email('Невозможно отравить письмо на ',recepient = my_email, sender="university.help@gmail.com")
-send_email('Нельзя отправить сообщение самому себе ', recepient="university.help@gmail.com",
-                 sender="university.help@gmail.com")
-send_email('Письмо успешно отправлено ', "от ")
+def send_email(message, recipient, sender="university.help@gmail.com"):
+    if '@' not in recipient or not recipient.endswith(
+            ('.com', '.ru', '.net')) or '@' not in sender or not sender.endswith(('.com', '.ru', '.net')):
+        print(f"Невозможно отправить письмо с адреса {sender} на адрес {recipient}.")
+    elif sender == recipient:
+        print("Нельзя отправить письмо самому себе!")
+    elif sender == "university.help@gmail.com":
+        print(f"Письмо успешно отправлено с адреса {sender} на адрес {recipient}.")
+    elif sender != "university.help@gmail.com":
+        print(f"НЕСТАНДАРТНЫЙ ОТПРАВИТЕЛЬ! Письмо отправлено с адреса {sender} на адрес {recipient}.")
+send_email('message', 'vasyok1337@gmail.com')
+send_email('message', 'urban.fan@mail.ru', 'urban.info@gmail.com')
+send_email('message', 'urban.student@mail.ru', 'urban.teacher@mail.uk')
+send_email('message', 'university.help@gmail.com', 'university.help@gmail.com')
