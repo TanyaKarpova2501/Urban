@@ -23,6 +23,7 @@ class Vehicle:
         Vehicle.get_model(self)
         Vehicle.get_horsepower(self)
         Vehicle.get_color(self)
+        print(f'Владелец: {self.owner}')
 
     def set_color(self,new_color):
 
