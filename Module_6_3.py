@@ -1,22 +1,24 @@
+import random
+
+
 class Animal:
     live = True
     sound = None
     _DEGREE_OF_DANGER = 0
-    def __init__(self,_cords, speed):
-        self._cords = _cords
-        _cords = [0, 0, 0]
+    def __init__(self, speed):
+        self._cords = [0, 0, 0]
         self.speed = speed
 
     def move(self,dx, dy, dz):
-        new_x = self._cords + dx * self.speed
-        new_y = self._cords + dy * self.speed
-        new_z = self._cords + dz * self.speed
+        new_x = self._cords[0] + dx * self.speed
+        new_y = self._cords[1] + dy * self.speed
+        new_z = self._cords[2] + dz * self.speed
         if new_z < 0:
             print("It's too deep, i can't dive :(")
         else:
             self._cords = [new_x, new_y, new_z]
 
-    def get_cards(self):
+    def get_cords(self):
         return f"X: {self._cords[0]}, Y: {self._cords[1]}, Z: {self._cords[2]}"
 
     def attack(self):
@@ -26,39 +28,42 @@ class Animal:
             print("Be careful, i'm attacking you 0_0")
 
 class Bird(Animal):
-    def __init__(self):
-        baek = True
+    def __init__(self, speed):
+        super().__init__(speed)
+        self.beak = True
 
     def lay_eggs(self):
-        print("Here are(is) <случайное число от 1 до 4> eggs for you")
+        num_ = random.randint(1,4)
+        print(f"Here are(is) {num_} eggs for you")
 
 class AquaticAnimal(Animal):
-    _DEGREE_OF_DANGER = 3
-    def diva_in(self, dz):
-        dz = dz // 2
+    def __init__(self,speed):
+        super().__init__(speed)
+        _DERGREE_OF_DANGER = 3
+
+    def dive_in(self, dz):
+        self._cords[2] -= abs(dz) * self.speed / 2
+
 
 class PoisonousAnimal(Animal):
-    _DEGREE_OF_DANGER = 8
+    def __init__(self,speed):
+        super().__init__(speed)
+        _DEGREE_OF_DANGER = 8
 
-class Duckbill(Animal, Bird, AquaticAnimal, PoisonousAnimal):
-    super().live()
-    super().beak()
-
-    super().speack()
-    super().attack()
-
-    super().move()
-    super().get_cards()
-    super().diva_in()
-    super().lay_eggs()
-    sound = "Click-click-click"
+class Duckbill(Bird, AquaticAnimal, PoisonousAnimal):
+    def __init__(self, speed):
+        super().__init__(speed)
+        Bird.__init__(self, speed)
+        AquaticAnimal.__init__(self, speed)
+        PoisonousAnimal.__init__(self, speed)
+        sound = "Click-click-click"
 
 db = Duckbill(10)
 
 print(db.live)
 print(db.beak)
 
-db.speak()
+#db.speed()
 db.attack()
 
 db.move(1, 2, 3)
@@ -67,4 +72,3 @@ db.dive_in(6)
 db.get_cords()
 
 db.lay_eggs()
-
