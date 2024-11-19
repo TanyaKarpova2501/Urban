@@ -1,6 +1,8 @@
 import random
 
 
+
+
 class Animal:
     live = True
     sound = None
@@ -19,13 +21,15 @@ class Animal:
             self._cords = [new_x, new_y, new_z]
 
     def get_cords(self):
-        return f"X: {self._cords[0]}, Y: {self._cords[1]}, Z: {self._cords[2]}"
+        print(f"X: {self._cords[0]}, Y: {self._cords[1]}, Z: {self._cords[2]}")
 
     def attack(self):
         if self._DEGREE_OF_DANGER < 5:
             print("Sorry, i'm peaceful :)")
         else:
             print("Be careful, i'm attacking you 0_0")
+    def speak(self):
+        print(self.sound)
 
 class Bird(Animal):
     def __init__(self, speed):
@@ -52,18 +56,17 @@ class PoisonousAnimal(Animal):
 
 class Duckbill(Bird, AquaticAnimal, PoisonousAnimal):
     def __init__(self, speed):
-        super().__init__(speed)
         Bird.__init__(self, speed)
         AquaticAnimal.__init__(self, speed)
         PoisonousAnimal.__init__(self, speed)
-        sound = "Click-click-click"
+        self.sound = "Click-click-click"
 
 db = Duckbill(10)
 
 print(db.live)
 print(db.beak)
 
-#db.speed()
+db.speak()
 db.attack()
 
 db.move(1, 2, 3)
