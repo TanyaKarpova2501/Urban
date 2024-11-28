@@ -22,7 +22,7 @@ class Shop:
         for product in products:
             if str(product) not in self.get_products():
                 file = open('products.txt', 'a+')
-                file.write()
+                file.write(product.__str__() + '\n')
                 file.close()
             else:
                 print(f'Продуукт {product} уже есть в магазине')
